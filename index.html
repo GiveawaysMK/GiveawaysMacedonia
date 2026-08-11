@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Giveaways Македонија | Премиум Портал</title>
+    <style>
+        :root {
+            --glass-bg: rgba(20, 20, 35, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --accent: #FF6600;
+            --accent-glow: rgba(255, 102, 0, 0.4);
+            --text-main: #FFFFFF;
+            --text-sub: #A0A0AB;
+            --input-bg: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #1e1e3f, #0b0b16);
+            color: var(--text-main);
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 12px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 440px;
+            min-height: 92vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 28px 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .screen.active {
+            display: flex;
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Brand / Logo Style */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* Interactive iPhone Logo Element */
+        .iphone-logo-badge {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 12px auto;
+            background: linear-gradient(135deg, #2c2c35, #111116);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--accent-glow);
+            position: relative;
+            animation: floatBadge 3s ease-in-out infinite;
+        }
+
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .iphone-logo-badge svg {
+            width: 36px;
+            height: 36px;
+            fill: #ffffff;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        /* Content Boxes */
+        .info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 14px 16px;
+            margin: 10px 0;
+        }
+
+        .info-card h3 {
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .info-card ul {
+            list-style: none;
+            font-size: 12px;
+            color: var(--text-sub);
+            line-height: 1.5;
+        }
+
+        .info-card ul li::before {
+            content: "• ";
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Interactive Counter Banner */
+        .interactive-banner {
+            background: linear-gradient(135deg, rgba(255, 102, 0, 0.15), rgba(0,0,0,0.4));
+            border: 1px solid rgba(255, 102, 0, 0.3);
+            border-radius: 14px;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .interactive-banner span {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .partners-text {
+            font-size: 11px;
+            color: var(--text-sub);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .partners-text a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .partners-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Forms & Inputs */
+        .form-group {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .price-display {
+            background: rgba(255, 102, 0, 0.08);
+            border: 1px solid rgba(255, 102, 0, 0.2);
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 10px 0 15px 0;
+        }
+
+        .payment-security-note {
+            font-size: 11px;
+            color: var(--text-sub);
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #FF6600, #e05b00);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px var(--accent-glow);
+            transition: transform 0.2s, opacity 0.2s;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            box-shadow: none;
+            margin-top: 8px;
+        }
+
+        .success-icon {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .footer-branding {
+            text-align: center;
+            font-size: 10px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- ЕКРАН 1: ПОЧЕТНА СТРАНИЦА -->
+    <div id="screen1" class="screen active">
+        <div>
+            <div class="brand-header">
+                <!-- Interactive iPhone Logo SVG -->
+                <div class="iphone-logo-badge">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.19c.65-.79 1.09-1.89.97-2.99-.96.04-2.12.64-2.79 1.43-.59.68-1.1 1.79-.96 2.86 1.08.08 2.13-.51 2.78-1.3z"/>
+                    </svg>
+                </div>
+                <h1>Giveaways Македонија</h1>
+                <p class="subtitle">Официјална национална промотивна кампања</p>
+            </div>
+
+            <div class="interactive-banner">
+                ⚡ Активни учесници во моментов: <span id="liveCounter">1,428</span> | Остануваат уште <strong>9 дена</strong>
+            </div>
+
+            <div class="info-card">
+                <h3>Детали за настанот</h3>
+                <ul>
+                    <li>Се доделуваат <strong>25 уреди iPhone 17 Pro Max</strong>.</li>
+                    <li>Секој поен има свој код кој го добивате на маил, колку повеќе поени имате толку повеќе се зголемува шансата за добивка.</li>
+                    <li>Максимално дозволено учество: до <strong>50 поени</strong> (50 евра) по корисник.</li>
+                    <li>Јавно извлекување: <strong>25 август</strong> директно на оваа апликација.</li>
+                </ul>
+            </div>
+
+            <div class="info-card" style="background: rgba(255,102,0,0.02);">
+                <h3>Зошто да учествувате?</h3>
+                <ul>
+                    <li>Целосно транспарентен дигитален систем за извлекување.</li>
+                    <li>Директна достава на добиениот уред до вашата врата во цела држава.</li>
+                    <li>Гарантирана сигурност и валидност на секој доделен код.</li>
+                </ul>
+            </div>
+
+            <div class="partners-text">
+                Официјални партнери: 
+                <a href="https://istyle.rs/" target="_blank">iStyle</a> & 
+                <a href="https://www.brandhk.com/" target="_blank">BrandHK</a>
+            </div>
+        </div>
+
+        <div>
+            <button class="btn" onclick="goToScreen(2)">Учествувај во кампањата</button>
+            <div class="footer-branding">Secure Ecosystem © 2026</div>
+        </div>
+    </div>
+
+    <!-- ЕКРАН 2: УПЛАТА И ПОДАТОЦИ -->
+    <div id="screen2" class="screen">
+        <div>
+            <div class="brand-header" style="margin-bottom: 12px;">
+                <h1>Креирајте акаунт</h1>
+                <p class="subtitle">Внесете ги вашите податоци и изберете поени за учество</p>
+            </div>
+
+            <form onsubmit="handlePaymentSubmit(event)">
+                <div class="form-group">
+                    <label>Име и презиме</label>
+                    <input type="text" id="userName" placeholder="Александар Петровски" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Електронска пошта (емаил)</label>
+                    <input type="email" id="userEmail" placeholder="aleksandar@domain.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Изберете го вкупниот број поени со кои сакате да учествувате во наградната игра. Вредноста на еден поен изнесува 1 евро (може да изберете од 1 до 50 поени):</label>
+                    <input type="number" id="userPoints" min="1" max="50" value="1" oninput="updatePointsCalculation()" required>
+                </div>
+
+                <div class="price-display" id="priceText">Вкупно за наплата: 1 евро</div>
+
+                <div class="payment-security-note">
+                    Трансакцијата се извршува преку екосистемот на <strong>PayPal</strong> со користење на вашата <strong>Visa</strong> или <strong>Mastercard</strong> картичка.
+                </div>
+
+                <button type="submit" class="btn">Продолжи кон PayPal</button>
+                <button type="button" class="btn btn-secondary" onclick="goToScreen(1)">Назад</button>
+            </form>
+        </div>
+
+        <div class="footer-branding">PayPal Gateway • Secured</div>
+    </div>
+
+    <!-- ЕКРАН 3: УСПЕШНА ПОТВРДА -->
+    <div id="screen3" class="screen">
+        <div>
+            <div class="brand-header">
+                <div class="success-icon">🎉</div>
+                <h1 style="color: #4cd964;">Успешна трансакција</h1>
+                <p class="subtitle">Вашето учество е успешно евидентирано во системот.</p>
+            </div>
+
+            <div class="info-card" style="border-color: rgba(76, 217, 100, 0.3);">
+                <h3>Резиме на пријава</h3>
+                <ul>
+                    <li><strong>Учесник:</strong> <span id="resName" style="color:white;"></span></li>
+                    <li><strong>Поени/Вредност:</strong> <span id="resPoints" style="color:var(--accent);"></span></li>
+                    <li><strong>Статус:</strong> <span style="color:#4cd964; font-weight:bold;">Верификуван учесник</span></li>
+                </ul>
+            </div>
+
+            <div class="payment-security-note" style="background: rgba(76, 217, 100, 0.08); border: 1px solid rgba(76, 217, 100, 0.2); color: #e2e8f0;">
+                На вашиот внесен емаил ќе добиете официјална верификација за плаќањето и бројот на поени.
+            </div>
+
+            <div class="info-card" style="text-align: center; background: rgba(255,255,255,0.02);">
+                <p style="font-size: 13px; color: var(--text-main); line-height: 1.5;">
+                    Ви благодариме и ви посакуваме многу среќа на <strong>25 август</strong> кога ќе се одржи јавното извлекување на апликацијата!
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <button class="btn" onclick="location.reload()">Затвори прозорец</button>
+            <div class="footer-branding">Giveaway Македонија © 2026</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Live subtle counter simulation for interactivity
+    setInterval(() => {
+        let counterEl = document.getElementById('liveCounter');
+        if(counterEl) {
+            let current = parseInt(counterEl.innerText.replace(',', ''));
+            if(Math.random() > 0.6) {
+                counterEl.innerText = (current + (Math.random() > 0.5 ? 1 : -1)).toLocaleString();
+            }
+        }
+    }, 4000);
+
+    function goToScreen(screenNum) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen' + screenNum).classList.add('active');
+    }
+
+    function updatePointsCalculation() {
+        let pts = parseInt(document.getElementById('userPoints').value) || 1;
+        if (pts < 1) pts = 1;
+        if (pts > 50) pts = 50;
+        document.getElementById('userPoints').value = pts;
+
+        let currencyWord = (pts === 1) ? "евро" : "евра";
+        document.getElementById('priceText').innerText = "Вкупно за наплата: " + pts + " " + currencyWord;
+    }
+
+    function handlePaymentSubmit(event) {
+        event.preventDefault();
+        let name = document.getElementById('userName').value;
+        let pts = parseInt(document.getElementById('userPoints').value);
+        let currencyWord = (pts === 1) ? "поен (1 евро)" : "поени (" + pts + " евра)";
+
+        let confirmPay = confirm("Интеграција со PayPal: Дали сакате да извршите наплата со Visa или Mastercard картичка за " + pts + " " + (pts === 1 ? "евро" : "евра") + "?");
+        
+        if (confirmPay) {
+            document.getElementById('resName').innerText = name;
+            document.getElementById('resPoints').innerText = pts + " " + currencyWord;
+            goToScreen(3);
+        }
+    }
+</script>
+
+</body>
+</html>
