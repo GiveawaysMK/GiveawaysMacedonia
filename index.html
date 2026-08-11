@@ -9,8 +9,8 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
-    <!-- PayPal SDK (Замени го YOUR_PAYPAL_CLIENT_ID со твојот вистински Client ID кога ќе го креираш) -->
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR"></script>
+    <!-- PayPal SDK со твојот Client ID -->
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAp4KE8A-c9gp8ICjTHkHPVK3JH8LK1M6iXXTZNePW6y3gpmQFOYVpnBC7k8TBcFUZmw1u47Zp2Ax69Fs&currency=EUR"></script>
 
     <style>
         :root {
@@ -355,14 +355,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Изберете го вкупниот број поени (1 поен = 1 евро, од 1 до 50):</label>
+                    <label>Изберете го вкупниот број поени со кои сакате да учествувате во наградната игра. Вредноста на еден поен изнесува 1 евро (може да изберете од 1 до 50 поени):</label>
                     <input type="number" id="userPoints" min="1" max="50" value="1" oninput="updatePointsCalculation()" required>
                 </div>
 
                 <div class="price-display" id="priceText">Вкупно за наплата: 1 евро</div>
 
                 <div class="payment-security-note">
-                    Трансакцијата се извршува преку екосистемот на <strong>PayPal</strong> со користење на вашата <strong>Visa</strong> или <strong>Mastercard</strong> картичка.
+                    Трансакцијата се извршува преку екосистемот на <strong>PayPal</strong> со користење на вашите <strong>Visa</strong> или <strong>Mastercard</strong> картички.
                 </div>
 
                 <!-- Место каде што се појавува вистинското PayPal копче -->
@@ -395,7 +395,7 @@
             </div>
 
             <div class="payment-security-note" style="background: rgba(76, 217, 100, 0.08); border: 1px solid rgba(76, 217, 100, 0.2); color: #e2e8f0;">
-                Вашите кодови се зачувани и пратени на вашиот емаил за јавното извлекување на <strong>25 август</strong>!
+                Вашите кодови се зачувани за јавното извлекување на <strong>25 август</strong>!
             </div>
         </div>
 
@@ -408,7 +408,7 @@
 </div>
 
 <script>
-    // Иницијализација на Firebase со твоите податоци
+    // Иницијализација на Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyBjtLcksqBPEjFoo0KowMIay2cHCwOY-OY",
         authDomain: "giveawaysmk-3ea01.firebaseapp.com",
