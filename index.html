@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Giveaways Македонија | Премиум Портал</title>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+    <!-- PayPal SDK (Замени го YOUR_PAYPAL_CLIENT_ID со твојот вистински Client ID кога ќе го креираш) -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR"></script>
+
     <style>
         :root {
             --glass-bg: rgba(20, 20, 35, 0.75);
@@ -66,13 +74,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Brand / Logo Style */
         .brand-header {
             text-align: center;
             margin-bottom: 15px;
         }
 
-        /* Interactive iPhone Logo Element */
         .iphone-logo-badge {
             width: 70px;
             height: 70px;
@@ -113,7 +119,6 @@
             line-height: 1.4;
         }
 
-        /* Content Boxes */
         .info-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -144,7 +149,6 @@
             font-weight: bold;
         }
 
-        /* Interactive Counter Banner */
         .interactive-banner {
             background: linear-gradient(135deg, rgba(255, 102, 0, 0.15), rgba(0,0,0,0.4));
             border: 1px solid rgba(255, 102, 0, 0.3);
@@ -152,6 +156,7 @@
             padding: 10px;
             text-align: center;
             margin-bottom: 12px;
+            font-size: 12px;
         }
 
         .interactive-banner span {
@@ -172,11 +177,6 @@
             font-weight: 600;
         }
 
-        .partners-text a:hover {
-            text-decoration: underline;
-        }
-
-        /* Forms & Inputs */
         .form-group {
             margin-bottom: 14px;
             text-align: left;
@@ -233,7 +233,6 @@
             border-radius: 10px;
         }
 
-        /* Buttons */
         .btn {
             width: 100%;
             padding: 16px;
@@ -268,6 +267,20 @@
             margin-bottom: 10px;
         }
 
+        .codes-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+            font-size: 12px;
+            color: #fff;
+            margin-top: 8px;
+            text-align: left;
+            word-break: break-all;
+        }
+
         .footer-branding {
             text-align: center;
             font-size: 10px;
@@ -286,7 +299,6 @@
     <div id="screen1" class="screen active">
         <div>
             <div class="brand-header">
-                <!-- Interactive iPhone Logo SVG -->
                 <div class="iphone-logo-badge">
                     <svg viewBox="0 0 24 24">
                         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.19c.65-.79 1.09-1.89.97-2.99-.96.04-2.12.64-2.79 1.43-.59.68-1.1 1.79-.96 2.86 1.08.08 2.13-.51 2.78-1.3z"/>
@@ -297,25 +309,16 @@
             </div>
 
             <div class="interactive-banner">
-                ⚡ Активни учесници во моментов: <span id="liveCounter">1,428</span> | Остануваат уште <strong>9 дена</strong>
+                ⚡ Активни учесници: <span id="liveCounter">1,428</span> | Остануваат уште <strong>9 дена</strong>
             </div>
 
             <div class="info-card">
                 <h3>Детали за настанот</h3>
                 <ul>
                     <li>Се доделуваат <strong>25 уреди iPhone 17 Pro Max</strong>.</li>
-                    <li>Секој поен има свој код кој го добивате на маил, колку повеќе поени имате толку повеќе се зголемува шансата за добивка.</li>
+                    <li>Секој поен има свој код, колку повеќе поени толку поголема шанса за добивка.</li>
                     <li>Максимално дозволено учество: до <strong>50 поени</strong> (50 евра) по корисник.</li>
-                    <li>Јавно извлекување: <strong>25 август</strong> директно на оваа апликација.</li>
-                </ul>
-            </div>
-
-            <div class="info-card" style="background: rgba(255,102,0,0.02);">
-                <h3>Зошто да учествувате?</h3>
-                <ul>
-                    <li>Целосно транспарентен дигитален систем за извлекување.</li>
-                    <li>Директна достава на добиениот уред до вашата врата во цела држава.</li>
-                    <li>Гарантирана сигурност и валидност на секој доделен код.</li>
+                    <li>Јавно извлекување: <strong>25 август</strong> директно на апликацијата.</li>
                 </ul>
             </div>
 
@@ -340,7 +343,7 @@
                 <p class="subtitle">Внесете ги вашите податоци и изберете поени за учество</p>
             </div>
 
-            <form onsubmit="handlePaymentSubmit(event)">
+            <div id="userForm">
                 <div class="form-group">
                     <label>Име и презиме</label>
                     <input type="text" id="userName" placeholder="Александар Петровски" required>
@@ -352,7 +355,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Изберете го вкупниот број поени со кои сакате да учествувате во наградната игра. Вредноста на еден поен изнесува 1 евро (може да изберете од 1 до 50 поени):</label>
+                    <label>Изберете го вкупниот број поени (1 поен = 1 евро, од 1 до 50):</label>
                     <input type="number" id="userPoints" min="1" max="50" value="1" oninput="updatePointsCalculation()" required>
                 </div>
 
@@ -362,9 +365,11 @@
                     Трансакцијата се извршува преку екосистемот на <strong>PayPal</strong> со користење на вашата <strong>Visa</strong> или <strong>Mastercard</strong> картичка.
                 </div>
 
-                <button type="submit" class="btn">Продолжи кон PayPal</button>
-                <button type="button" class="btn btn-secondary" onclick="goToScreen(1)">Назад</button>
-            </form>
+                <!-- Место каде што се појавува вистинското PayPal копче -->
+                <div id="paypal-button-container"></div>
+
+                <button type="button" class="btn btn-secondary" onclick="goToScreen(1)" style="margin-top: 10px;">Назад</button>
+            </div>
         </div>
 
         <div class="footer-branding">PayPal Gateway • Secured</div>
@@ -376,52 +381,53 @@
             <div class="brand-header">
                 <div class="success-icon">🎉</div>
                 <h1 style="color: #4cd964;">Успешна трансакција</h1>
-                <p class="subtitle">Вашето учество е успешно евидентирано во системот.</p>
+                <p class="subtitle">Вашето учество е успешно евидентирано во базата.</p>
             </div>
 
             <div class="info-card" style="border-color: rgba(76, 217, 100, 0.3);">
                 <h3>Резиме на пријава</h3>
                 <ul>
                     <li><strong>Учесник:</strong> <span id="resName" style="color:white;"></span></li>
-                    <li><strong>Поени/Вредност:</strong> <span id="resPoints" style="color:var(--accent);"></span></li>
-                    <li><strong>Статус:</strong> <span style="color:#4cd964; font-weight:bold;">Верификуван учесник</span></li>
+                    <li><strong>Емаил:</strong> <span id="resEmail" style="color:white;"></span></li>
+                    <li><strong>Поени/Кодови:</strong> <span id="resPoints" style="color:var(--accent);"></span></li>
                 </ul>
+                <div class="codes-box" id="resCodesList">Генерирање кодови...</div>
             </div>
 
             <div class="payment-security-note" style="background: rgba(76, 217, 100, 0.08); border: 1px solid rgba(76, 217, 100, 0.2); color: #e2e8f0;">
-                На вашиот внесен емаил ќе добиете официјална верификација за плаќањето и бројот на поени.
-            </div>
-
-            <div class="info-card" style="text-align: center; background: rgba(255,255,255,0.02);">
-                <p style="font-size: 13px; color: var(--text-main); line-height: 1.5;">
-                    Ви благодариме и ви посакуваме многу среќа на <strong>25 август</strong> кога ќе се одржи јавното извлекување на апликацијата!
-                </p>
+                Вашите кодови се зачувани и пратени на вашиот емаил за јавното извлекување на <strong>25 август</strong>!
             </div>
         </div>
 
         <div>
             <button class="btn" onclick="location.reload()">Затвори прозорец</button>
-            <div class="footer-branding">Giveaway Македонија © 2026</div>
+            <div class="footer-branding">Giveaways Македонија © 2026</div>
         </div>
     </div>
 
 </div>
 
 <script>
-    // Live subtle counter simulation for interactivity
-    setInterval(() => {
-        let counterEl = document.getElementById('liveCounter');
-        if(counterEl) {
-            let current = parseInt(counterEl.innerText.replace(',', ''));
-            if(Math.random() > 0.6) {
-                counterEl.innerText = (current + (Math.random() > 0.5 ? 1 : -1)).toLocaleString();
-            }
-        }
-    }, 4000);
+    // Иницијализација на Firebase со твоите податоци
+    const firebaseConfig = {
+        apiKey: "AIzaSyBjtLcksqBPEjFoo0KowMIay2cHCwOY-OY",
+        authDomain: "giveawaysmk-3ea01.firebaseapp.com",
+        databaseURL: "https://giveawaysmk-3ea01-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "giveawaysmk-3ea01",
+        storageBucket: "giveawaysmk-3ea01.appspot.com",
+        messagingSenderId: "181374074515",
+        appId: "1:181374074515:web:713f0b2a57538411315766"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
 
     function goToScreen(screenNum) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('screen' + screenNum).classList.add('active');
+        
+        if(screenNum === 2) {
+            renderPayPalButton();
+        }
     }
 
     function updatePointsCalculation() {
@@ -434,19 +440,91 @@
         document.getElementById('priceText').innerText = "Вкупно за наплата: " + pts + " " + currencyWord;
     }
 
-    function handlePaymentSubmit(event) {
-        event.preventDefault();
-        let name = document.getElementById('userName').value;
-        let pts = parseInt(document.getElementById('userPoints').value);
-        let currencyWord = (pts === 1) ? "поен (1 евро)" : "поени (" + pts + " евра)";
-
-        let confirmPay = confirm("Интеграција со PayPal: Дали сакате да извршите наплата со Visa или Mastercard картичка за " + pts + " " + (pts === 1 ? "евро" : "евра") + "?");
-        
-        if (confirmPay) {
-            document.getElementById('resName').innerText = name;
-            document.getElementById('resPoints').innerText = pts + " " + currencyWord;
-            goToScreen(3);
+    // Генерирање на уникатни кодови
+    function generateCodes(count) {
+        let codes = [];
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for (let i = 0; i < count; i++) {
+            let code = "MK-";
+            for (let j = 0; j < 6; j++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            codes.push(code);
         }
+        return codes;
+    }
+
+    let paypalRendered = false;
+    function renderPayPalButton() {
+        const container = document.getElementById('paypal-button-container');
+        if (paypalRendered) return;
+        
+        if (typeof paypal === 'undefined') {
+            container.innerHTML = "<p style='color:red; font-size:12px;'>PayPal SDK не е вчитан. Проверете ја интернет конекцијата.</p>";
+            return;
+        }
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                let pts = parseInt(document.getElementById('userPoints').value) || 1;
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: pts.toString()
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Успешна наплата! Зачувуваме во Firebase
+                    saveUserDataToFirebase();
+                });
+            },
+            onError: function(err) {
+                alert("Грешка при наплатата преку PayPal. Ве молиме обидете се повторно.");
+            }
+        }).render('#paypal-button-container');
+        
+        paypalRendered = true;
+    }
+
+    function saveUserDataToFirebase() {
+        let name = document.getElementById('userName').value.trim();
+        let email = document.getElementById('userEmail').value.trim();
+        let points = parseInt(document.getElementById('userPoints').value) || 1;
+
+        if(!name || !email) {
+            alert("Ве молиме внесете име и емаил.");
+            return;
+        }
+
+        let userCodes = generateCodes(points);
+        let timestamp = new Date().toISOString();
+
+        // Зачувување во Firebase Realtime Database
+        let newUserRef = database.ref('participants').push();
+        newUserRef.set({
+            name: name,
+            email: email,
+            points: points,
+            codes: userCodes,
+            createdAt: timestamp
+        }, function(error) {
+            if (error) {
+                alert("Грешка при зачувување во базата.");
+            } else {
+                // Прикажи ги податоците на успешниот екран
+                document.getElementById('resName').innerText = name;
+                document.getElementById('resEmail').innerText = email;
+                document.getElementById('resPoints').innerText = points + " поени";
+                
+                let codesHtml = userCodes.join("<br>");
+                document.getElementById('resCodesList').innerHTML = codesHtml;
+
+                goToScreen(3);
+            }
+        });
     }
 </script>
 
